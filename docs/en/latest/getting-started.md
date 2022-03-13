@@ -22,7 +22,7 @@ title: Getting Started
 -->
 ## What is an API Gateway
 
-An API gateway is an API management tool that acts as a mid layer service between a client and a number backend services. Typically, the API gateway receives the clients requests and processes it by summoning multiple microservices, aggregating the services and returning the appropriate results.
+An [API gateway](https://microservices.io/patterns/apigateway.html) is an API management tool that acts as a mid layer service between a client and a number backend services. Typically, the API gateway receives the clients requests and processes it by summoning multiple microservices, aggregating the services and returning the appropriate results.
 
 ## What is Apache APISIX
 
@@ -32,35 +32,35 @@ Apache APISIX facilitates interface traffic handling for Websites, Mobile and Io
 ### The problem APISIX solves
 
   - Help enterprises to solve the difficulties in the transformation of traditional monolithic architecture, so as to achieve rapid iteration of business and products.
-  - Apache APISIX replaces NGINX and handles traditional north-south traffic. It also replaces Envoy to handle east-west traffic between services. 
+  - Apache APISIX replaces NGINX and handles traditional north-south traffic. It also replaces Envoy to handle east-west traffic between services.
   - Handles Layer 4 and Layer 7 traffic: HTTP, HTTPs, TCP, UDP, MQTT, Dubbo, gRPC, etc.
   - It can also be used as a [k8s ingress controller](https://github.com/apache/apisix-ingress-controller).
   - Use IdP plugin as Zero-Trust gateway
   - Easy to use: APISIX also consists of a built-in low-code dashboard that offers a powerful and flexible interface. You can write your own custom plugins or use custom load balancing algorithms.
-  - Apache APISIX supports multi-platforms, languages and protocols. 
 
 ## Features
 
-Apache APISIX not only covers the traditional functions of NGINX, but also deeply cooperates with Apache SkyWalking in observability, which greatly improves service governance capabilities. Some of the characteristics of the Apache APISIX gateway include:
+Apache APISIX not only covers the traditional functions of NGINX, but also deeply cooperates with different observability platforms, which greatly improves service governance capabilities. Some of the characteristics of the Apache APISIX gateway include:
 
   - All platforms:
-  
+
     APISIX is a cloud native, open source API gateway. You can run APISIX from bare-metal to Kubernetes. Since APISIX supports ARM64, it avoids the lock-in challenge of the infrastructure technology. It also provides integration to cloud providers like AWS Lambda, Azure Functions, Lua functions and Apache OpenWhisk.
+
   - Full Dynamic:
   
-    The biggest feature of Apache APISIX is that it is fully dynamic. That includes routing, SSL certificates, plugins, upstream etc. All features are dynamically configured through the admin API, without having to restart the service at all.
+    The biggest feature of Apache APISIX is that it is fully dynamic. That includes routing, SSL certificates, plugins, upstream etc. It adopts hot-reloading so, every feature can be dynamically configured by the admin API, without having to restart the service at all.
 
-  - Fine-grained routing:
+  - Fine-Grained Routing:
   
     Support all Nginx built-in variables as conditions for routing, so you can use cookie, args, etc. as routing conditions to implement canary release, A/B testing, etc.  Apache APISIX provides operators that serve as judgment conditions for routing and a custom routing matching function. By using GraphQL attributes, APISIX allows you to filter routes.
 
-  - OPS friendly:
+  - OPS Friendly:
 
-    Apache APISIX has been adopted amongst organisation’s DevOps team because of it Ops-friendly strategy.
+    Apache APISIX has been adopted amongst organisation’s DevOps team because of it Ops-friendly strategy. it supports numerous tools and platforms like HashiCorp Vault, [Zipkin](https://github.com/Anita-ihuman/apisix/blob/Introduction/docs/en/latest/plugins/zipkin.md), [Apache SkyWalking](https://github.com/Anita-ihuman/apisix/blob/Introduction/docs/en/latest/plugins/skywalking.md), [Consul](https://github.com/Anita-ihuman/apisix/blob/Introduction/docs/en/latest/discovery/consul_kv.md), [Nacos](https://github.com/Anita-ihuman/apisix/blob/Introduction/docs/en/latest/discovery/nacos.md), [Eureka](https://github.com/Anita-ihuman/apisix/blob/Introduction/docs/en/latest/discovery.md), etc. With a user friendly [dashboard](https://github.com/apache/apisix-dashboard), Apache APISIX makes it is easy for users/admins to operate APISIX through a frontend interface.
 
-  - Multi-Language support:
+  - Multi-Language Support:
 
-    Apache APISIX is a multi-language gateway for plugin development and supports multiple languages via RPC and Wasm. Developers can choose the language according to their needs and only need to write the code according to the SDK before compiling it to Wasm bytecode. APISIX has support for Java, Golang, Python and Node.js.
+    Apache APISIX is a multi-language gateway for plugin development and supports multiple languages via RPC and Wasm. Developers choose the language according to their needs and write the code according to the language-specific SDKs. The plugin can be integrated with APISIX by compiling it to Wasm (WebAssembly) bytecode. Optionally, developers can leverage the `plugin runners` to implement specific RPC methods (the actual business logic). Currently, APISIX supports plugin runners in Java, Golang, Python and Node.js.
 
 ## Summary
 
