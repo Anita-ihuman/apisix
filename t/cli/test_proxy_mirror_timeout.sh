@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -15,24 +17,27 @@
 # limitations under the License.
 #
 
-# when using prometheus-operator, you can apply this into k8s.
-# Mention: ServiceMonitor should be the same namespace with prometheus-operator.
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: apisix-gw
-  labels:
-    app: apisix-gw
-spec:
-  endpoints:
-    - interval: 10s
-      honorLabels: true
-      port: http
-      path: /apisix/prometheus/metrics
-      scheme: http
-  selector:
-    matchLabels:
-      app: apisix-gw
-  namespaceSelector:
-    any: true
+. ./t/cli/common.sh
+
+echo '
+plugin_attr:
+  proxy-mirror:
+    timeout:
+        connect: 2000ms
+        read: 2s
+        send: 2000ms
+' > conf/config.yaml
+
+make init
+
+if ! grep "proxy_connect_timeout 2000ms;" conf/nginx.conf > /dev/null; then
+    echo "failed: proxy_connect_timeout not found in nginx.conf"
+    exit 1
+fi
+
+if ! grep "proxy_read_timeout 2s;" conf/nginx.conf > /dev/null; then
+    echo "failed: proxy_read_timeout not found in nginx.conf"
+    exit 1
+fi
+
+echo "passed: proxy timeout configuration is validated"
